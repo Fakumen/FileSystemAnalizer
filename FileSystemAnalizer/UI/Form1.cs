@@ -21,7 +21,7 @@ namespace FileSystemAnalizer.UI
         {
             InitializeComponent();
             this.scannerApp = scannerApp;
-            scanDataTree = new FileSystemScanDataTree(FileHierarchyTree);
+            scanDataTree = new FileSystemScanDataTree(FileHierarchyTree, IconPool.GetImageList());
         }
 
         protected override void OnLoad(EventArgs e)
@@ -32,22 +32,30 @@ namespace FileSystemAnalizer.UI
 
         private void SelectFolderButton_Click(object sender, EventArgs e)
         {
-            using(var dialog = new FolderBrowserDialog())
+            using (var dialog = new FolderBrowserDialog())
             {
                 var result = dialog.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    FileHierarchyTree.ImageList = IconPool.GetImageList();
-                    var firstFolderScanData = scannerApp.Scan(dialog.SelectedPath);
-                    scanDataTree.Clear();
-                    scanDataTree.AddNode(new FolderDataNode(firstFolderScanData));
+                    Action<IFolderScanData> onScanFinished = CreateNode;
+                    scannerApp.OnStartScanButtonClick(dialog.SelectedPath, onScanFinished);
                 }
             }
         }
 
         private void FileHierarchyTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            if (e.Node is IFileDataNode)
+            {
+                var fileNode = e.Node as IFileDataNode;
+                e.Node.Text = $"{fileNode.ScanData.Path}";
+            }
+        }
 
+        private void CreateNode(IFolderScanData firstFolderScanData)
+        {
+            scanDataTree.Clear();
+            scanDataTree.AddNode(new FolderDataNode(firstFolderScanData));
         }
     }
 }

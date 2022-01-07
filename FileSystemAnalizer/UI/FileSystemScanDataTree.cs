@@ -13,9 +13,10 @@ namespace FileSystemAnalizer.UI
     {
         private readonly TreeView treeView;
 
-        public FileSystemScanDataTree(TreeView treeView)
+        public FileSystemScanDataTree(TreeView treeView, ImageList imageList)
         {
             this.treeView = treeView;
+            treeView.ImageList = imageList;
         }
 
         public void AddNode<TDataNode>(TDataNode node) where TDataNode : TreeNode

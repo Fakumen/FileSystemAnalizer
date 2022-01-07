@@ -53,7 +53,6 @@
     <Compile Include="App\Interfaces\IFileDataNode.cs" />
     <Compile Include="App\Interfaces\IFolderDataNode.cs" />
     <Compile Include="App\ScannerApp.cs" />
-    <Compile Include="App\UIElement.cs" />
     <Compile Include="Domain\DomainEnumerableExtensions.cs" />
     <Compile Include="Domain\Interfaces\IFileScanData.cs" />
     <Compile Include="Domain\Interfaces\IFolderScanData.cs" />
@@ -63,6 +62,7 @@
     <Compile Include="Domain\Interfaces\IScanData.cs" />
     <Compile Include="Domain\SizeData.cs" />
     <Compile Include="Infrastructure\UserAccess.cs" />
+    <Compile Include="UI\FileDataNode.cs" />
     <Compile Include="UI\FileSystemScanDataTree.cs" />
     <Compile Include="UI\IconPool.cs" />
     <Compile Include="UI\FolderDataNode.cs" />
