@@ -49,11 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App\FolderScanner.cs" />
     <Compile Include="App\Interfaces\IDataNode.cs" />
     <Compile Include="App\Interfaces\IFileDataNode.cs" />
     <Compile Include="App\Interfaces\IFolderDataNode.cs" />
-    <Compile Include="App\Scanner.cs" />
     <Compile Include="App\ScannerApp.cs" />
     <Compile Include="App\UIElement.cs" />
     <Compile Include="Domain\DomainEnumerableExtensions.cs" />
@@ -101,12 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\folder.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\file.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

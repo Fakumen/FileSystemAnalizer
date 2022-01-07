@@ -16,3 +16,12 @@ D:\University\C#\Project\versions\v1\FileSystemAnalizer\obj\Debug\FileSystemAnal
 D:\University\C#\Project\versions\v1\FileSystemAnalizer\obj\Debug\FileSystemAnalizer.csproj.GenerateResource.cache
 D:\University\C#\Project\versions\v1\FileSystemAnalizer\obj\Debug\FileSystemAnalizer.exe
 D:\University\C#\Project\versions\v1\FileSystemAnalizer\obj\Debug\FileSystemAnalizer.pdb
+D:\University\GitHub\FileSystemAnalizer\FileSystemAnalizer\bin\Debug\FileSystemAnalizer.exe.config
+D:\University\GitHub\FileSystemAnalizer\FileSystemAnalizer\bin\Debug\FileSystemAnalizer.exe
+D:\University\GitHub\FileSystemAnalizer\FileSystemAnalizer\bin\Debug\FileSystemAnalizer.pdb
+D:\University\GitHub\FileSystemAnalizer\FileSystemAnalizer\obj\Debug\FileSystemAnalizer.csprojAssemblyReference.cache
+D:\University\GitHub\FileSystemAnalizer\FileSystemAnalizer\obj\Debug\FileSystemAnalizer.Properties.Resources.resources
+D:\University\GitHub\FileSystemAnalizer\FileSystemAnalizer\obj\Debug\FileSystemAnalizer.UI.FileAnalizerForm.resources
+D:\University\GitHub\FileSystemAnalizer\FileSystemAnalizer\obj\Debug\FileSystemAnalizer.csproj.GenerateResource.cache
+D:\University\GitHub\FileSystemAnalizer\FileSystemAnalizer\obj\Debug\FileSystemAnalizer.exe
+D:\University\GitHub\FileSystemAnalizer\FileSystemAnalizer\obj\Debug\FileSystemAnalizer.pdb

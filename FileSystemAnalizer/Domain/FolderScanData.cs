@@ -24,6 +24,7 @@ namespace FileSystemAnalizer.Domain
         public IEnumerable<IFolderScanData> Folders => folders;//.Select(f => f) Нельзя сделать даункаст к листу и изменить
         public IEnumerable<IFileScanData> Files => files;
         public bool IsDataReady { get; private set; } = false;
+        public bool IsInspected { get; private set; }
 
         private readonly Lazy<long> totalFilesCount;
         private readonly Lazy<long> totalFoldersCount;
@@ -31,7 +32,6 @@ namespace FileSystemAnalizer.Domain
         private readonly List<FolderScanData> folders = new List<FolderScanData>();
         private readonly List<FileScanData> files = new List<FileScanData>();
         private readonly DirectoryInfo directoryInfo;
-        private bool isInspected;
         private int readySubfoldersCount;
 
         public event Action<IFolderScanData> DataReady;
@@ -53,7 +53,7 @@ namespace FileSystemAnalizer.Domain
 
         public void Inspect()
         {
-            if (isInspected)
+            if (IsInspected)
                 return;
             foreach (var directory in directoryInfo.SafeEnumerateDirectories())
             {
@@ -87,7 +87,7 @@ namespace FileSystemAnalizer.Domain
             //        lock (files)
             //            files.Add(data);
             //    });
-            isInspected = true;
+            IsInspected = true;
         }
 
         public void InspectAll()
