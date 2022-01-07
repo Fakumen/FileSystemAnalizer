@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FileSystemAnalizer.Domain
 {
-    public sealed class FileScanData : IFileScanData, ITreeLeave
+    public sealed class FileScanData : IFileScanData
     {
         public string Path => fileInfo.FullName;
         public string Name => fileInfo.Name;

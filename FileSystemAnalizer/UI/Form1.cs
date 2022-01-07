@@ -15,9 +15,11 @@ namespace FileSystemAnalizer.UI
 {
     public partial class FileAnalizerForm : Form
     {
-        public FileAnalizerForm()
+        private readonly ScannerApp scannerApp;
+        public FileAnalizerForm(ScannerApp scannerApp)
         {
             InitializeComponent();
+            this.scannerApp = scannerApp;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -33,11 +35,12 @@ namespace FileSystemAnalizer.UI
                 var result = dialog.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    var scanner = new FolderScanner() as Scanner<string, FolderScanData>;
                     FileHierarchyTree.ImageList = IconPool.GetImageList();
+                    var firstFolderScanData = scannerApp.Scan(dialog.SelectedPath);
+                    //var scanner = new FolderScanner() as Scanner<string, FolderScanData>;
                     var hierarchy = new FileSystemScanDataTree(FileHierarchyTree);
                     hierarchy.Clear();
-                    hierarchy.AddNode(new FolderDataNode(scanner.TryScan(dialog.SelectedPath)));
+                    hierarchy.AddNode(new FolderDataNode(firstFolderScanData));
                 }
             }
         }

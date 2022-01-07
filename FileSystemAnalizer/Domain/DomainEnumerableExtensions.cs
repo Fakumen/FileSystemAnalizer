@@ -22,7 +22,21 @@ namespace FileSystemAnalizer.Domain
             }
             catch
             {
+                //обработка папок, к которым нет доступа
+            }
+            return directories;
+        }
 
+        public static IEnumerable<FileInfo> SafeEnumerateFiles(this DirectoryInfo directoryInfo)
+        {
+            IEnumerable<FileInfo> directories = Enumerable.Empty<FileInfo>();
+            try
+            {
+                directories = directoryInfo.EnumerateFiles();
+            }
+            catch
+            {
+                //обработка файлов, к которым нет доступа
             }
             return directories;
         }

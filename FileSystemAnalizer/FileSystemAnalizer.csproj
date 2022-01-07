@@ -54,6 +54,7 @@
     <Compile Include="App\Interfaces\IFileDataNode.cs" />
     <Compile Include="App\Interfaces\IFolderDataNode.cs" />
     <Compile Include="App\Scanner.cs" />
+    <Compile Include="App\ScannerApp.cs" />
     <Compile Include="App\UIElement.cs" />
     <Compile Include="Domain\DomainEnumerableExtensions.cs" />
     <Compile Include="Domain\Interfaces\IFileScanData.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="UI\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -101,9 +103,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\file.png" />
-    <Content Include="Resources\folder.png" />
+    <None Include="Resources\folder.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\file.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

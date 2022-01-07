@@ -24,7 +24,8 @@ namespace FileSystemAnalizer
             //Console.ReadLine();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FileAnalizerForm());
+            var app = new ScannerApp();
+            Application.Run(new FileAnalizerForm(app));
         }
     }
 }

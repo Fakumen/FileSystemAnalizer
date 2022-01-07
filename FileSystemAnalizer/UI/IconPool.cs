@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FileSystemAnalizer.Properties;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -18,8 +19,8 @@ namespace FileSystemAnalizer.UI
         static IconPool()
         {
             var projectDirectory = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-            ImageList.Images.Add(FolderIconKey, Image.FromFile($@"{projectDirectory}\Resources\folder.png"));
-            ImageList.Images.Add(FileIconKey, Image.FromFile($@"{projectDirectory}\Resources\file.png"));
+            ImageList.Images.Add(FolderIconKey, Resources.folder);
+            ImageList.Images.Add(FileIconKey, Resources.file);
         }
 
         public static ImageList GetImageList()
