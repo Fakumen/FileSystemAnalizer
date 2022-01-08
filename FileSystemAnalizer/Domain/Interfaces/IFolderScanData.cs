@@ -18,6 +18,5 @@ namespace FileSystemAnalizer.Domain
         IEnumerable<IFileScanData> Files { get; }
 
         void Inspect();
-        void InspectAll();
     }
 }

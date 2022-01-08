@@ -90,13 +90,6 @@ namespace FileSystemAnalizer.Domain
             IsInspected = true;
         }
 
-        public void InspectAll()
-        {
-            Inspect();
-            foreach (var f in Folders)
-                f.InspectAll();
-        }
-
         private void OnSubfolderDataReady(IFolderScanData data)
         {
             readySubfoldersCount++;

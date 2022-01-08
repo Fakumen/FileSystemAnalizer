@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FileSystemAnalizer.App;
 using FileSystemAnalizer.UI;
+using Ninject;
+using System.IO;
 
 namespace FileSystemAnalizer
 {
@@ -24,8 +26,14 @@ namespace FileSystemAnalizer
             //Console.ReadLine();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var app = new ScannerApp();
-            Application.Run(new FileAnalizerForm(app));
+            var container = new StandardKernel();
+            container.Bind<ScannerApp>().ToSelf().InSingletonScope();
+            container.Bind<IScanDataTreeBuilder>().To<ScanDataTreeBuilder>().InSingletonScope();
+            container.Bind<FileAnalizerForm>().ToSelf().InSingletonScope();
+            container.Bind<ImageList>().ToConstant(IconPool.ImageList).InSingletonScope();
+            var form = container.Get<FileAnalizerForm>();
+            container.Bind<TreeView>().ToConstant(form.ScanHierarchyTree);
+            Application.Run(form);
         }
     }
 }

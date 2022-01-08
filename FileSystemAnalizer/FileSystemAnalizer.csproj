@@ -36,6 +36,18 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>dll-pack\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>dll-pack\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Conventions">
+      <HintPath>dll-pack\Ninject.Extensions.Conventions.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Factory">
+      <HintPath>dll-pack\Ninject.Extensions.Factory.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,6 +64,7 @@
     <Compile Include="App\Interfaces\IDataNode.cs" />
     <Compile Include="App\Interfaces\IFileDataNode.cs" />
     <Compile Include="App\Interfaces\IFolderDataNode.cs" />
+    <Compile Include="App\Interfaces\IScanDataTree.cs" />
     <Compile Include="App\ScannerApp.cs" />
     <Compile Include="Domain\DomainEnumerableExtensions.cs" />
     <Compile Include="Domain\Interfaces\IFileScanData.cs" />
@@ -63,14 +76,14 @@
     <Compile Include="Domain\SizeData.cs" />
     <Compile Include="Infrastructure\UserAccess.cs" />
     <Compile Include="UI\FileDataNode.cs" />
-    <Compile Include="UI\FileSystemScanDataTree.cs" />
+    <Compile Include="UI\ScanDataTreeBuilder.cs" />
     <Compile Include="UI\IconPool.cs" />
     <Compile Include="UI\FolderDataNode.cs" />
-    <Compile Include="UI\Form1.cs">
+    <Compile Include="UI\FileAnalizerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UI\FileAnalizerForm.Designer.cs">
+      <DependentUpon>FileAnalizerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,8 +97,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UI\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="UI\FileAnalizerForm.resx">
+      <DependentUpon>FileAnalizerForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -25,3 +25,8 @@ D:\University\GitHub\FileSystemAnalizer\FileSystemAnalizer\obj\Debug\FileSystemA
 D:\University\GitHub\FileSystemAnalizer\FileSystemAnalizer\obj\Debug\FileSystemAnalizer.csproj.GenerateResource.cache
 D:\University\GitHub\FileSystemAnalizer\FileSystemAnalizer\obj\Debug\FileSystemAnalizer.exe
 D:\University\GitHub\FileSystemAnalizer\FileSystemAnalizer\obj\Debug\FileSystemAnalizer.pdb
+D:\University\GitHub\FileSystemAnalizer\FileSystemAnalizer\bin\Debug\Ninject.dll
+D:\University\GitHub\FileSystemAnalizer\FileSystemAnalizer\bin\Debug\Ninject.Extensions.Conventions.dll
+D:\University\GitHub\FileSystemAnalizer\FileSystemAnalizer\bin\Debug\Ninject.Extensions.Factory.dll
+D:\University\GitHub\FileSystemAnalizer\FileSystemAnalizer\obj\Debug\FileSystemAnalizer.csproj.CopyComplete
+D:\University\GitHub\FileSystemAnalizer\FileSystemAnalizer\bin\Debug\Castle.Core.dll

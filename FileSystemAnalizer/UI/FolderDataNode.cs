@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace FileSystemAnalizer.UI
 {
-    public class FolderDataNode : TreeNode, IFolderDataNode<FolderDataNode, FileDataNode>
+    public class FolderDataNode : TreeNode, IFolderDataNode
     {
         public IFolderScanData ScanData { get; }
         public string Label
@@ -25,24 +25,16 @@ namespace FileSystemAnalizer.UI
             var sizeUnits = ScanData.Size.BestFittingUnits;
             Text = $"{ScanData.Name} [{ScanData.Size.GetInUnits(sizeUnits):f1} {sizeUnits.ToString()}]";
             SelectedImageKey = ImageKey = IconPool.FolderIconKey;
-            foreach (var folder in ScanData.Folders)
-            {
-                AddNode(new FolderDataNode(folder));
-            }
-            foreach (var file in ScanData.Files)
-            {
-                AddNode(new FileDataNode(file));
-            }
         }
 
-        public void AddNode(FileDataNode fileNode)
+        public void AddNode(IFileDataNode fileNode)
         {
-            Nodes.Add(fileNode);
+            Nodes.Add(fileNode as FileDataNode);
         }
 
-        public void AddNode(FolderDataNode folderNode)
+        public void AddNode(IFolderDataNode folderNode)
         {
-            Nodes.Add(folderNode);
+            Nodes.Add(folderNode as FolderDataNode);
         }
     }
 }

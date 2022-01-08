@@ -14,16 +14,14 @@ namespace FileSystemAnalizer.UI
     {
         public const string FolderIconKey = "folder";
         public const string FileIconKey = "file";
-        private static readonly ImageList ImageList = new ImageList();
+        public static ImageList ImageList { get; }
 
         static IconPool()
         {
             var projectDirectory = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            ImageList = new ImageList();
             ImageList.Images.Add(FolderIconKey, Resources.folder);
             ImageList.Images.Add(FileIconKey, Resources.file);
         }
-
-        public static ImageList GetImageList()
-            => ImageList;
     }
 }
