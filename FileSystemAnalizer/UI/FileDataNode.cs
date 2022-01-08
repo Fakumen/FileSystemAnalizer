@@ -12,6 +12,11 @@ namespace FileSystemAnalizer.UI
     public class FileDataNode : TreeNode, IFileDataNode
     {
         public IFileScanData ScanData { get; }
+        public string Label
+        {
+            get => Text;
+            set => Text = value;
+        }
 
         public FileDataNode(IFileScanData fileData)
         {

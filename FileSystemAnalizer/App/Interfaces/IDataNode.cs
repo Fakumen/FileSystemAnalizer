@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace FileSystemAnalizer.App
 {
-    public interface IDataNode<TScanData>
+    public interface IDataNode<out TScanData>
         where TScanData : IScanData
     {
         TScanData ScanData { get; }
+        string Label { get; set; }
     }
 }

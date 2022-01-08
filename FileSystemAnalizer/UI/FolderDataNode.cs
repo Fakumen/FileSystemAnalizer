@@ -13,6 +13,11 @@ namespace FileSystemAnalizer.UI
     public class FolderDataNode : TreeNode, IFolderDataNode<FolderDataNode, FileDataNode>
     {
         public IFolderScanData ScanData { get; }
+        public string Label
+        {
+            get => Text;
+            set => Text = value;
+        }
 
         public FolderDataNode(IFolderScanData folderData)
         {

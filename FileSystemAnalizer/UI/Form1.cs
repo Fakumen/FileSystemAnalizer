@@ -45,11 +45,12 @@ namespace FileSystemAnalizer.UI
 
         private void FileHierarchyTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (e.Node is IFileDataNode)
-            {
-                var fileNode = e.Node as IFileDataNode;
-                e.Node.Text = $"{fileNode.ScanData.Path}";
-            }
+            //var ee = e.Node is FileDataNode;
+            //var a = e.Node is IFileDataNode;
+            //var b = e.Node is IDataNode<IFileScanData>;
+            //var c = e.Node is IDataNode<IScanData>;
+            //var d = e.Node is IDataNode<FileScanData>;//false
+            scannerApp.OnSelectNode((IDataNode<IScanData>)e.Node);
         }
 
         private void CreateNode(IFolderScanData firstFolderScanData)

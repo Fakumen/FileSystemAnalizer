@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace FileSystemAnalizer.App
 {
-    public interface IFolderDataNode<TFolderData, TFileData> : IDataNode<IFolderScanData>
-        where TFolderData : IFolderDataNode<TFolderData, TFileData>
-        where TFileData : IFileDataNode
+    public interface IFolderDataNode<TFolderNode, TFileNode> : IDataNode<IFolderScanData>
+        where TFolderNode : IFolderDataNode<TFolderNode, TFileNode>
+        where TFileNode : IFileDataNode
     {
-        void AddNode(TFolderData folderNode);
-        void AddNode(TFileData fileNode);
+        void AddNode(TFolderNode folderNode);
+        void AddNode(TFileNode fileNode);
     }
 }

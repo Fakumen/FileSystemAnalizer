@@ -28,5 +28,20 @@ namespace FileSystemAnalizer.App
             var firstFolderScanData = Scan(path);
             createNode(firstFolderScanData);
         }
+
+        public void OnSelectNode(IDataNode<IScanData> node)
+        {
+            if (node is IFileDataNode)
+            {
+                var fileNode = node as IFileDataNode;
+                node.Label = $"{fileNode.ScanData.Path}";
+            }
+            else if (node is IFolderDataNode<IFolderDataNode<>, IFileDataNode)
+            {
+
+            }
+            var dataNode = node as IDataNode<IScanData>;
+            node.Label = $"{dataNode.ScanData.Path}";
+        }
     }
 }
