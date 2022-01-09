@@ -48,7 +48,6 @@ namespace FileSystemAnalizer.UI
             this.SelectFolderButton.TabIndex = 1;
             this.SelectFolderButton.Text = "Выбрать каталог";
             this.SelectFolderButton.UseVisualStyleBackColor = true;
-            this.SelectFolderButton.Click += new System.EventHandler(this.SelectFolderButton_Click);
             // 
             // FileSystemAnalizerForm
             // 

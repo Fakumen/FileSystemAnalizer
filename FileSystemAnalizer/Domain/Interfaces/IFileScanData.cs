@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FileSystemAnalizer.Domain
 {
-    public interface IFileScanData : IScanData
+    public interface IFileScanData : IFileSystemScanData
     {
 
     }

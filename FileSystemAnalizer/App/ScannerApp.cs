@@ -10,24 +10,19 @@ namespace FileSystemAnalizer.App
 {
     public class ScannerApp
     {
-        //public event Action<IDataNode<IScanData>> ScanFinished
-        private IScanDataTreeBuilder treeBuilder => lazyTreeBuilder.Value;
+        private IScanDataTreeBuilder scanDataTreeBuilder => lazyTreeBuilder.Value;
         private readonly Lazy<IScanDataTreeBuilder> lazyTreeBuilder;
 
-        private readonly Func<IFolderScanData, IFolderDataNode> folderNodeFactory;
-        private readonly Func<IFileScanData, IFileDataNode> fileNodeFactory;
         public ScannerApp(Lazy<IScanDataTreeBuilder> treeBuilder)
         {
             lazyTreeBuilder = treeBuilder;
         }
-        //public ScannerApp(Func<IScanDataTreeBuilder> treeBuilderFactory)
-        //{
-        //    lazyTreeBuilder = new Lazy<IScanDataTreeBuilder>(treeBuilderFactory);
-        //}
 
-        private IFolderScanData Scan(string path)
+        private IFolderScanData Scan(string folderPath)
         {
-            var result = new FolderScanData(path);
+            if (!Directory.Exists(folderPath))
+                throw new DirectoryNotFoundException();
+            var result = new FolderScanData(new DirectoryInfo(folderPath));
             InspectAll(result);
             return result;
         }
@@ -39,41 +34,19 @@ namespace FileSystemAnalizer.App
                 InspectAll(f);
         }
 
-        public void CreateAllSubNodes(IFolderDataNode folderDataNode)
-        {
-            var rootFolderData = folderDataNode.ScanData;
-            foreach (var folderData in rootFolderData.Folders)
-            {
-                var folderNode = folderNodeFactory(folderData);
-                folderDataNode.AddNode(folderNode);
-                CreateAllSubNodes(folderNode);
-            }
-            foreach (var fileData in rootFolderData.Files)
-            {
-                folderDataNode.AddNode(fileNodeFactory(fileData));
-            }
-        }
-
         public void OnStartScanButtonClick(
-            string path, 
-            Func<IFolderScanData, IFolderDataNode> folderNodeFactory,
-            Func<IFileScanData, IFileDataNode> fileNodeFactory)
+            string path)
         {
             var firstFolderData = Scan(path);
-            treeBuilder.Clear();
-            var rootFolderNode = folderNodeFactory(firstFolderData);
-            rootFolderNode.FillAllSubNodes();
-            //CreateAllSubNodes(rootFolderNode);
-            treeBuilder.AddNode(rootFolderNode);
+            scanDataTreeBuilder.Build(firstFolderData);
 
         }
 
-        public void OnSelectNode(IDataNode<IScanData> node)
+        public void OnSelectDataNode(IDataNode<IFileSystemScanData> node)
         {
-            node.Label = $"{node.ScanData.Path}";
             if (node is IFileDataNode)
             {
-
+                node.Label = $"{node.ScanData.Path}";
             }
             else if (node is IFolderDataNode)
             {

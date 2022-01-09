@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace FileSystemAnalizer.App
 {
     public interface IDataNode<out TScanData>
-        where TScanData : IScanData
+        where TScanData : IFileSystemScanData
     {
         TScanData ScanData { get; }
         string Label { get; set; }

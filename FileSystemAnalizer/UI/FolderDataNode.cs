@@ -29,12 +29,43 @@ namespace FileSystemAnalizer.UI
 
         public void AddNode(IFileDataNode fileNode)
         {
-            Nodes.Add(fileNode as FileDataNode);
+            Nodes.Add((FileDataNode) fileNode);
         }
 
         public void AddNode(IFolderDataNode folderNode)
         {
-            Nodes.Add(folderNode as FolderDataNode);
+            Nodes.Add((FolderDataNode) folderNode);
+        }
+
+        public void FillAllSubNodes()
+        {
+            foreach (var folderData in ScanData.Folders)
+            {
+                var folderNode = new FolderDataNode(folderData);
+                AddNode(folderNode);
+                folderNode.FillAllSubNodes();
+            }
+            foreach (var fileData in ScanData.Files)
+            {
+                var fileNode = new FileDataNode(fileData);
+                AddNode(fileNode);
+            }
+        }
+
+        public void FillAllSubNodesSortedBy<TKey>(Func<IFileSystemScanData, TKey> sorter)
+            where TKey : IComparable
+        {
+            foreach (var folderData in ScanData.Folders.OrderBy(sorter).Cast<IFolderScanData>())
+            {
+                var folderNode = new FolderDataNode(folderData);
+                AddNode(folderNode);
+                folderNode.FillAllSubNodesSortedBy(sorter);
+            }
+            foreach (var fileData in ScanData.Files.OrderBy(sorter).Cast<IFileScanData>())
+            {
+                var fileNode = new FileDataNode(fileData);
+                AddNode(fileNode);
+            }
         }
     }
 }

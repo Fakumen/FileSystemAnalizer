@@ -23,13 +23,13 @@ namespace FileSystemAnalizer.UI
         {
             InitializeComponent();
             lazyScannerApp = scannerApp;
-            //scanDataTree = new ScanDataTreeBuilder(FileHierarchyTree, IconPool.ImageList);
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
             FileHierarchyTree.AfterSelect += FileHierarchyTree_AfterSelect;
+            SelectFolderButton.Click += SelectFolderButton_Click;
         }
 
         private void SelectFolderButton_Click(object sender, EventArgs e)
@@ -39,22 +39,14 @@ namespace FileSystemAnalizer.UI
                 var result = dialog.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    scannerApp.OnStartScanButtonClick(
-                        dialog.SelectedPath, 
-                        folderData => new FolderDataNode(folderData),
-                        fileData => new FileDataNode(fileData));
+                    scannerApp.OnStartScanButtonClick(dialog.SelectedPath);
                 }
             }
         }
 
         private void FileHierarchyTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            //var ee = e.Node is FileDataNode;
-            //var a = e.Node is IFileDataNode;
-            //var b = e.Node is IDataNode<IFileScanData>;
-            //var c = e.Node is IDataNode<IScanData>;
-            //var d = e.Node is IDataNode<FileScanData>;//false
-            scannerApp.OnSelectNode((IDataNode<IScanData>)e.Node);
+            scannerApp.OnSelectDataNode((IDataNode<IFileSystemScanData>)e.Node);
         }
     }
 }

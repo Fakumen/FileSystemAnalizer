@@ -19,12 +19,13 @@ namespace FileSystemAnalizer.UI
             treeView.ImageList = imageList;
         }
 
-        public void AddNode(IFolderDataNode node)
-            => treeView.Nodes.Add((FolderDataNode) node);
-
-        public void AddNode(IFileDataNode node)
-            => treeView.Nodes.Add((FileDataNode) node);
-
-        public void Clear() => treeView.Nodes.Clear();
+        public void Build(IFolderScanData rootFolderData)
+        {
+            treeView.Nodes.Clear();
+            var rootFolderNode = new FolderDataNode(rootFolderData);
+            treeView.Nodes.Add(rootFolderNode);
+            rootFolderNode.FillAllSubNodes();
+            rootFolderNode.FillAllSubNodesSortedBy(n => n.Size.SizeInBytes);
+        }
     }
 }

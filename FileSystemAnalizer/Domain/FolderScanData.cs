@@ -8,10 +8,13 @@ using FileSystemAnalizer.Infrastructure;
 
 namespace FileSystemAnalizer.Domain
 {
-    public sealed class FolderScanData : IFolderScanData//, ITree<FolderScanData, FileScanData>
+    public sealed class FolderScanData : IFolderScanData
     {
+        [LazyData]
         public long TotalFilesCount => EnsureDataIsReady(totalFilesCount.Value);
+        [LazyData]
         public long TotalFoldersCount => EnsureDataIsReady(totalFoldersCount.Value);
+        [LazyData]
         public SizeData Size => EnsureDataIsReady(size.Value);//Размер (не "На диске")
         public string Path => directoryInfo.FullName;
         public string Name => directoryInfo.Name;
@@ -49,44 +52,29 @@ namespace FileSystemAnalizer.Domain
             totalFilesCount = new Lazy<long>(totalFilesCountFactory);
         }
 
-        public FolderScanData(string directoryPath) : this(new DirectoryInfo(directoryPath)) { }
-
         public void Inspect()
         {
             if (IsInspected)
                 return;
-            foreach (var directory in directoryInfo.SafeEnumerateDirectories())
+            bool isFolderEnumerateFailed;
+            bool isFileEnumerateFailed;
+            foreach (var directory in directoryInfo.SafeEnumerateDirectories(out isFolderEnumerateFailed))
             {
                 var folderData = new FolderScanData(directory);
                 folderData.DataReady += OnSubfolderDataReady;
                 folders.Add(folderData);
             }
-            foreach (var file in directoryInfo.SafeEnumerateFiles())
+            foreach (var file in directoryInfo.SafeEnumerateFiles(out isFileEnumerateFailed))
             {
                 files.Add(new FileScanData(file));
             }
             if (FoldersCount == 0)
                 ClaimDataReady();
-            //directoryInfo
-            //    .EnumerateDirectories()
-            //    .Filter(!UserAccess.IsCurrentUserAdmin)
-            //    .AsParallel()
-            //    .ForAll(d =>
-            //    {
-            //        var data = new FolderScanData(d);
-            //        lock (folders)
-            //            folders.Add(data);
-            //    });
-            //directoryInfo
-            //    .EnumerateFiles()
-            //    .Filter(!UserAccess.IsCurrentUserAdmin)
-            //    .AsParallel()
-            //    .ForAll(f =>
-            //    {
-            //        var data = new FileScanData(f);
-            //        lock (files)
-            //            files.Add(data);
-            //    });
+            if (isFolderEnumerateFailed || isFileEnumerateFailed)
+            {
+                //обработка файлов, к которым нет доступа
+                ClaimDataReady();
+            }
             IsInspected = true;
         }
 
@@ -102,6 +90,8 @@ namespace FileSystemAnalizer.Domain
 
         private void ClaimDataReady()
         {
+            if (IsDataReady)
+                return;
             IsDataReady = true;
             DataReady?.Invoke(this);
         }
@@ -109,7 +99,7 @@ namespace FileSystemAnalizer.Domain
         private T EnsureDataIsReady<T>(T value)
         {
             if (!IsDataReady)
-                throw new ObjectNotReadyException($"Object was not ready for use.Please, ensure that object's {nameof(IsDataReady)} property is true before use");
+                throw new ObjectNotReadyException($"Object was not ready for use. Please, ensure that object's {nameof(IsDataReady)} property is true before use or use {nameof(DataReady)} event.");
             return value;
         }
     }

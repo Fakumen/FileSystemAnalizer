@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FileSystemAnalizer.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,6 @@ namespace FileSystemAnalizer.App
 {
     public interface IScanDataTreeBuilder
     {
-        void Clear();
-        void AddNode(IFolderDataNode node);
-        void AddNode(IFileDataNode node);
+        void Build(IFolderScanData rootFolderData);
     }
 }

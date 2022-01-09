@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FileSystemAnalizer.Domain
 {
-    public interface IFolderScanData : IScanData, ILazyDataLoader<IFolderScanData>
+    public interface IFolderScanData : IFileSystemScanData, ILazyDataLoader<IFolderScanData>
     {
         //long TotalFilesCount { get; }
         //long TotalFoldersCount { get; }

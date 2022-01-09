@@ -18,21 +18,18 @@ namespace FileSystemAnalizer
         [STAThread]
         static void Main()
         {
-            //var path = @"D:\GAMES";
-            //var scanner = new FolderScanner();
-            //var node = new FolderDataNode(scanner.TryScan(path));
-            //var sizeUnits = node.ScanData.Size.BestFittingUnits;
-            //Console.WriteLine($"{node.ScanData.Size.GetInUnits(sizeUnits)} {sizeUnits}");
-            //Console.ReadLine();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             var container = new StandardKernel();
             container.Bind<ScannerApp>().ToSelf().InSingletonScope();
             container.Bind<IScanDataTreeBuilder>().To<ScanDataTreeBuilder>().InSingletonScope();
             container.Bind<FileAnalizerForm>().ToSelf().InSingletonScope();
             container.Bind<ImageList>().ToConstant(IconPool.ImageList).InSingletonScope();
+
             var form = container.Get<FileAnalizerForm>();
             container.Bind<TreeView>().ToConstant(form.ScanHierarchyTree);
+
             Application.Run(form);
         }
     }
