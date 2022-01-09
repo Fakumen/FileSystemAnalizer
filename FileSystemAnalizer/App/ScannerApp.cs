@@ -50,13 +50,12 @@ namespace FileSystemAnalizer.App
             if (node is IFileDataNode fileNode)
             {
                 //при выборе ноды-файла
-                node.Label = $"{node.ScanData.Path}";
-                dataInspector.DisplayScanDataInformation(fileNode);
+                dataInspector.DisplayDetailedScanDataInformation(fileNode);
             }
             else if (node is IFolderDataNode folderNode)
             {
                 //при выборе ноды-папки
-                dataInspector.DisplayScanDataInformation(folderNode);
+                dataInspector.DisplayDetailedScanDataInformation(folderNode);
             }
         }
 

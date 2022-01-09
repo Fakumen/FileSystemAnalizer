@@ -98,7 +98,7 @@ namespace FileSystemAnalizer.Domain
 
         private T EnsureDataIsReady<T>(T value)
         {
-            if (!IsDataReady || !IsInspected)
+            if (!IsDataReady)
                 throw new ObjectNotReadyException($"Object was not ready for use. Please, ensure that object's {nameof(IsDataReady)} property is true before use or use {nameof(DataReady)} event.");
             return value;
         }

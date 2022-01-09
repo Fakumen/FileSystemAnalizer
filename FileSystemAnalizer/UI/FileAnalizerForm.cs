@@ -29,6 +29,7 @@ namespace FileSystemAnalizer.UI
         {
             base.OnLoad(e);
             FileHierarchyTree.AfterSelect += FileHierarchyTree_AfterSelect;
+            FileHierarchyTree.AfterExpand += FileHierarchyTree_AfterExpand;
             SelectFolderButton.Click += SelectFolderButton_Click;
         }
 
@@ -47,6 +48,11 @@ namespace FileSystemAnalizer.UI
         private void FileHierarchyTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             scannerApp.OnSelectDataNode((IDataNode<IFileSystemScanData>)e.Node);
+        }
+
+        private void FileHierarchyTree_AfterExpand(object sender, TreeViewEventArgs e)
+        {
+
         }
     }
 }

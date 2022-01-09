@@ -8,7 +8,7 @@ namespace FileSystemAnalizer.App
 {
     public interface IScanDataInspector
     {
-        void DisplayScanDataInformation(IFolderDataNode folderDataNode);
-        void DisplayScanDataInformation(IFileDataNode fileDataNode);
+        void DisplayDetailedScanDataInformation(IFolderDataNode folderDataNode);
+        void DisplayDetailedScanDataInformation(IFileDataNode fileDataNode);
     }
 }
