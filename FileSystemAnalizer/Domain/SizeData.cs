@@ -20,17 +20,7 @@ namespace FileSystemAnalizer.Domain
 
         public long SizeInBytes { get; }
 
-        public ByteUnit BestFittingUnits
-        {
-            get
-            {
-                if (SizeInBytes == 0)
-                    return ByteUnit.Byte;
-                return new[] { ByteUnit.Byte, ByteUnit.Kilobyte, ByteUnit.Megabyte, ByteUnit.Gigabyte, ByteUnit.Terabyte }
-                .Where(byteUnit => SizeInBytes >= (long)byteUnit)
-                .Max();
-            }
-        }
+        public ByteUnit BestFittingUnits { get; }
 
         public double GetInUnits(ByteUnit units) => (double)SizeInBytes / (long)units;
 
@@ -39,6 +29,21 @@ namespace FileSystemAnalizer.Domain
             if (sizeInBytes < 0)
                 throw new ArgumentException();
             SizeInBytes = sizeInBytes;
+            BestFittingUnits = CalculateBestFittingUnits();
+        }
+
+        public override string ToString()
+        {
+            return $"{GetInUnits(BestFittingUnits):f1} {BestFittingUnits}";
+        }
+
+        private ByteUnit CalculateBestFittingUnits()
+        {
+            if (SizeInBytes == 0)
+                return ByteUnit.Byte;
+            return new[] { ByteUnit.Byte, ByteUnit.Kilobyte, ByteUnit.Megabyte, ByteUnit.Gigabyte, ByteUnit.Terabyte }
+            .Where(byteUnit => SizeInBytes >= (long)byteUnit)
+            .Max();
         }
     }
 }

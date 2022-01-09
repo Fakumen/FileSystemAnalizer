@@ -17,7 +17,9 @@ namespace FileSystemAnalizer.UI
     {
         private ScannerApp scannerApp => lazyScannerApp.Value;
         private readonly Lazy<ScannerApp> lazyScannerApp;
-        public TreeView ScanHierarchyTree => FileHierarchyTree;
+        public TreeView ScanHierarchyTree => fileHierarchyTree;
+        public PictureBox SelectedNodeIconBox => selectedNodeIconBox;
+        public ListBox PropertiesInfoListBox => propertiesInfoListBox;
 
         public FileAnalizerForm(Lazy<ScannerApp> scannerApp)
         {
@@ -28,12 +30,13 @@ namespace FileSystemAnalizer.UI
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            FileHierarchyTree.AfterSelect += FileHierarchyTree_AfterSelect;
-            FileHierarchyTree.AfterExpand += FileHierarchyTree_AfterExpand;
-            SelectFolderButton.Click += SelectFolderButton_Click;
+            fileHierarchyTree.AfterSelect += FileHierarchyTree_AfterSelect;
+            fileHierarchyTree.AfterExpand += FileHierarchyTree_AfterExpand;
+            selectFolderButton.Click += OnSelectFolderButtonClick;
+            sortButton.Click += OnSortButtonClick;
         }
 
-        private void SelectFolderButton_Click(object sender, EventArgs e)
+        private void OnSelectFolderButtonClick(object sender, EventArgs e)
         {
             using (var dialog = new FolderBrowserDialog())
             {
@@ -47,7 +50,13 @@ namespace FileSystemAnalizer.UI
 
         private void FileHierarchyTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            groupBox1.Visible = true;
             scannerApp.OnSelectDataNode((IDataNode<IFileSystemScanData>)e.Node);
+        }
+
+        private void OnSortButtonClick(object sender, EventArgs e)
+        {
+            scannerApp.OnSortButtonClick();
         }
 
         private void FileHierarchyTree_AfterExpand(object sender, TreeViewEventArgs e)

@@ -29,6 +29,8 @@ namespace FileSystemAnalizer
 
             var form = container.Get<FileAnalizerForm>();
             container.Bind<TreeView>().ToConstant(form.ScanHierarchyTree);
+            container.Bind<PictureBox>().ToConstant(form.SelectedNodeIconBox);
+            container.Bind<ListBox>().ToConstant(form.PropertiesInfoListBox);
             container.Bind<IScanDataInspector>().To<ScanDataInspector>().InSingletonScope();
             Application.Run(form);
         }

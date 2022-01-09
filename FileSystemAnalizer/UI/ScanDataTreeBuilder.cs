@@ -20,13 +20,32 @@ namespace FileSystemAnalizer.UI
             treeView.ImageList = imageList;
         }
 
-        public void Build(IFolderScanData rootFolderData)
+        public void Build(IFolderScanData rootFolderData, Func<IFileSystemScanData, bool> selector)
         {
             treeView.Nodes.Clear();
             var rootFolderNode = new FolderDataNode(rootFolderData);
             treeView.Nodes.Add(rootFolderNode);
             scanRootNode = rootFolderNode;
-            rootFolderNode.CreateAllSubNodes();
+            CreateAllSubNodes(rootFolderNode, selector);
+        }
+
+        public void CreateAllSubNodes(FolderDataNode rootFolderNode, Func<IFileSystemScanData, bool> selector)
+        {
+            foreach (var folderData in rootFolderNode.ScanData.Folders
+                .Where(selector)
+                .Cast<IFolderScanData>()
+                .Select(n => new FolderDataNode(n)))
+            {
+                rootFolderNode.AddNode(folderData);
+                CreateAllSubNodes(folderData, selector);
+            }
+            foreach (var fileData in rootFolderNode.ScanData.Files
+                .Where(selector)
+                .Cast<IFileScanData>()
+                .Select(n => new FileDataNode(n)))
+            {
+                rootFolderNode.AddNode(fileData);
+            }
         }
 
         public void SortNodesBy<TKey>(Func<IDataNode<IFileSystemScanData>, TKey> keySelector) where TKey : IComparable
@@ -34,6 +53,13 @@ namespace FileSystemAnalizer.UI
             if (scanRootNode == null)
                 return;
             SortSubNodes(scanRootNode, keySelector);
+        }
+
+        public void SortNodesByDescending<TKey>(Func<IDataNode<IFileSystemScanData>, TKey> keySelector) where TKey : IComparable
+        {
+            if (scanRootNode == null)
+                return;
+            SortSubNodesByDescending(scanRootNode, keySelector);
         }
 
         private void SortSubNodes<TKey>(
@@ -47,6 +73,22 @@ namespace FileSystemAnalizer.UI
             {
                 folderNode.AddNode(node);
                 SortSubNodes(node, keySelector);
+            }
+            foreach (var node in sortedFileNodes)
+                folderNode.AddNode(node);
+        }
+
+        private void SortSubNodesByDescending<TKey>(
+            IFolderDataNode folderNode,
+            Func<IDataNode<IFileSystemScanData>, TKey> keySelector) where TKey : IComparable
+        {
+            var sortedFolderNodes = folderNode.FolderDataNodes.OrderByDescending(keySelector).Cast<IFolderDataNode>().ToList();
+            var sortedFileNodes = folderNode.FileDataNodes.OrderByDescending(keySelector).Cast<IFileDataNode>().ToList();
+            folderNode.ClearNodes();
+            foreach (var node in sortedFolderNodes)
+            {
+                folderNode.AddNode(node);
+                SortSubNodesByDescending(node, keySelector);
             }
             foreach (var node in sortedFileNodes)
                 folderNode.AddNode(node);

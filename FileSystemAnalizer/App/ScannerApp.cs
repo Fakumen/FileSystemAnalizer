@@ -15,6 +15,8 @@ namespace FileSystemAnalizer.App
         private IScanDataInspector dataInspector => lazyDataInspector.Value;
         private readonly Lazy<IScanDataInspector> lazyDataInspector;
 
+        private bool sortByDescending;
+
         public ScannerApp(Lazy<IScanDataTreeBuilder> treeBuilder, Lazy<IScanDataInspector> dataInspector)
         {
             lazyTreeBuilder = treeBuilder;
@@ -41,8 +43,7 @@ namespace FileSystemAnalizer.App
             string path)
         {
             var firstFolderData = Scan(path);
-            scanDataTreeBuilder.Build(firstFolderData);
-            OnSortButtonClick();
+            scanDataTreeBuilder.Build(firstFolderData, data => true);
         }
 
         public void OnSelectDataNode(IDataNode<IFileSystemScanData> node)
@@ -61,7 +62,16 @@ namespace FileSystemAnalizer.App
 
         public void OnSortButtonClick()
         {
-            scanDataTreeBuilder.SortNodesBy(n => n.ScanData.Size.SizeInBytes);
+            if (sortByDescending)
+            {
+                scanDataTreeBuilder.SortNodesByDescending(n => n.ScanData.Size.SizeInBytes);
+                sortByDescending = !sortByDescending;
+            }
+            else
+            {
+                scanDataTreeBuilder.SortNodesBy(n => n.ScanData.Size.SizeInBytes);
+                sortByDescending = !sortByDescending;
+            }
         }
     }
 }
