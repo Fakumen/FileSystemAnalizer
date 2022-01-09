@@ -32,7 +32,8 @@ namespace FileSystemAnalizer.UI
             this.fileHierarchyTree = new System.Windows.Forms.TreeView();
             this.selectFolderButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.propertiesInfoListBox = new System.Windows.Forms.ListBox();
+            this.selectedNodeTitleLabel = new System.Windows.Forms.Label();
+            this.selectedNodePropertiesBox = new System.Windows.Forms.ListBox();
             this.selectedNodeIconBox = new System.Windows.Forms.PictureBox();
             this.sortButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -58,7 +59,8 @@ namespace FileSystemAnalizer.UI
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.groupBox1.Controls.Add(this.propertiesInfoListBox);
+            this.groupBox1.Controls.Add(this.selectedNodeTitleLabel);
+            this.groupBox1.Controls.Add(this.selectedNodePropertiesBox);
             this.groupBox1.Controls.Add(this.selectedNodeIconBox);
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox1.Location = new System.Drawing.Point(420, 52);
@@ -69,20 +71,30 @@ namespace FileSystemAnalizer.UI
             this.groupBox1.Text = "Информация об элементе";
             this.groupBox1.Visible = false;
             // 
-            // propertiesInfoListBox
+            // selectedNodeTitleLabel
             // 
-            this.propertiesInfoListBox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.propertiesInfoListBox.FormattingEnabled = true;
-            this.propertiesInfoListBox.ItemHeight = 19;
-            this.propertiesInfoListBox.Location = new System.Drawing.Point(16, 174);
-            this.propertiesInfoListBox.Name = "propertiesInfoListBox";
-            this.propertiesInfoListBox.Size = new System.Drawing.Size(301, 175);
-            this.propertiesInfoListBox.TabIndex = 1;
+            this.selectedNodeTitleLabel.AutoSize = true;
+            this.selectedNodeTitleLabel.Location = new System.Drawing.Point(150, 30);
+            this.selectedNodeTitleLabel.Name = "selectedNodeTitleLabel";
+            this.selectedNodeTitleLabel.Size = new System.Drawing.Size(88, 23);
+            this.selectedNodeTitleLabel.TabIndex = 2;
+            this.selectedNodeTitleLabel.Text = "Название";
+            // 
+            // selectedNodePropertiesBox
+            // 
+            this.selectedNodePropertiesBox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.selectedNodePropertiesBox.FormattingEnabled = true;
+            this.selectedNodePropertiesBox.HorizontalScrollbar = true;
+            this.selectedNodePropertiesBox.ItemHeight = 19;
+            this.selectedNodePropertiesBox.Location = new System.Drawing.Point(11, 174);
+            this.selectedNodePropertiesBox.Name = "selectedNodePropertiesBox";
+            this.selectedNodePropertiesBox.Size = new System.Drawing.Size(313, 175);
+            this.selectedNodePropertiesBox.TabIndex = 1;
             // 
             // selectedNodeIconBox
             // 
             this.selectedNodeIconBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.selectedNodeIconBox.Location = new System.Drawing.Point(16, 39);
+            this.selectedNodeIconBox.Location = new System.Drawing.Point(11, 27);
             this.selectedNodeIconBox.Name = "selectedNodeIconBox";
             this.selectedNodeIconBox.Size = new System.Drawing.Size(128, 128);
             this.selectedNodeIconBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -110,6 +122,7 @@ namespace FileSystemAnalizer.UI
             this.Name = "FileAnalizerForm";
             this.Text = "Form1";
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.selectedNodeIconBox)).EndInit();
             this.ResumeLayout(false);
 
@@ -121,8 +134,9 @@ namespace FileSystemAnalizer.UI
         private Button selectFolderButton;
         private GroupBox groupBox1;
         private PictureBox selectedNodeIconBox;
-        private ListBox propertiesInfoListBox;
+        private ListBox selectedNodePropertiesBox;
         private Button sortButton;
+        private Label selectedNodeTitleLabel;
     }
 }
 

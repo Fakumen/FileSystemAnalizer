@@ -19,7 +19,8 @@ namespace FileSystemAnalizer.UI
         private readonly Lazy<ScannerApp> lazyScannerApp;
         public TreeView ScanHierarchyTree => fileHierarchyTree;
         public PictureBox SelectedNodeIconBox => selectedNodeIconBox;
-        public ListBox PropertiesInfoListBox => propertiesInfoListBox;
+        public ListBox SelectedNodePropertiesBox => selectedNodePropertiesBox;
+        public Label SelectedNodeTitleLabel => selectedNodeTitleLabel;
 
         public FileAnalizerForm(Lazy<ScannerApp> scannerApp)
         {

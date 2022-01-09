@@ -28,10 +28,13 @@ namespace FileSystemAnalizer
             container.Bind<ImageList>().ToConstant(IconPool.ImageList).InSingletonScope();
 
             var form = container.Get<FileAnalizerForm>();
-            container.Bind<TreeView>().ToConstant(form.ScanHierarchyTree);
-            container.Bind<PictureBox>().ToConstant(form.SelectedNodeIconBox);
-            container.Bind<ListBox>().ToConstant(form.PropertiesInfoListBox);
+
+            container.Bind<TreeView>().ToConstant(form.ScanHierarchyTree).WhenInjectedInto<IScanDataTreeBuilder>();
+            container.Bind<PictureBox>().ToConstant(form.SelectedNodeIconBox).WhenInjectedInto<IScanDataInspector>();
+            container.Bind<ListBox>().ToConstant(form.SelectedNodePropertiesBox).WhenInjectedInto<IScanDataInspector>();
+            container.Bind<Label>().ToConstant(form.SelectedNodeTitleLabel).WhenInjectedInto<IScanDataInspector>();
             container.Bind<IScanDataInspector>().To<ScanDataInspector>().InSingletonScope();
+            container.Bind<ScanDataInspector>().ToSelf();
             Application.Run(form);
         }
     }

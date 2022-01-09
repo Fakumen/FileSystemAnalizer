@@ -23,5 +23,7 @@ namespace FileSystemAnalizer.UI
             ImageList.Images.Add(FolderIconKey, Resources.folder);
             ImageList.Images.Add(FileIconKey, Resources.file);
         }
+
+        public static Image GetIconByKey(string key) => ImageList.Images[key];
     }
 }

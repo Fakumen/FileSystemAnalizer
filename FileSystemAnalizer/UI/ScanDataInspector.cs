@@ -15,21 +15,22 @@ namespace FileSystemAnalizer.UI
     {
         private readonly PictureBox iconBox;
         private readonly ListBox propertiesBox;
-        public ScanDataInspector(PictureBox iconBox, ListBox propertiesBox)
+        private readonly Label titleLabel;
+
+        public ScanDataInspector(PictureBox iconBox, ListBox propertiesBox, Label titleLabel)
         {
             this.iconBox = iconBox;
             this.propertiesBox = propertiesBox;
+            this.titleLabel = titleLabel;
         }
 
         public void DisplayDetailedScanDataInformation(IFolderDataNode folderDataNode)
         {
             var data = folderDataNode.ScanData;
-            //var sizeUnits = data.Size.BestFittingUnits;
-            //var size = data.IsInspected ? $"{data.Size.GetInUnits(sizeUnits):f1} {sizeUnits}" : "???";
-            //folderDataNode.Label = $"{data.Name} [{size}]";
-            iconBox.Image = null;
+            iconBox.Image = IconPool.GetIconByKey(IconPool.FolderIconKey);
+            titleLabel.Text = data.Name;
             propertiesBox.Items.Clear();
-            AddCommonProperties(folderDataNode);
+            AddProperties(data);
         }
 
         public void DisplayDetailedScanDataInformation(IFileDataNode fileDataNode)
@@ -37,14 +38,23 @@ namespace FileSystemAnalizer.UI
             var data = fileDataNode.ScanData;
             using (var icon = Icon.ExtractAssociatedIcon(data.Path))
                 iconBox.Image = icon.ToBitmap();
+            titleLabel.Text = data.Name;
             propertiesBox.Items.Clear();
-            AddCommonProperties(fileDataNode);
+            AddProperties(data);
         }
 
-        private void AddCommonProperties(IDataNode<IFileSystemScanData> commonDataNode)
+        private void AddProperties<TData>(TData data)
+            where TData : IFileSystemScanData
         {
-            var data = commonDataNode.ScanData;
-            var properties = data.GetType().GetProperties();
+            var properties = data.GetType().GetProperties();//new PropertyInfo[0];
+            //if (data is IFileScanData)
+            //{
+            //    properties = typeof(IFileScanData).GetProperties();
+            //}
+            //else if (data is IFolderScanData)
+            //{
+            //    properties = typeof(IFileScanData).GetProperties();
+            //}
             foreach (var p in properties)
             {
                 propertiesBox.Items.Add($"{p.Name}: {p.GetValue(data)}");

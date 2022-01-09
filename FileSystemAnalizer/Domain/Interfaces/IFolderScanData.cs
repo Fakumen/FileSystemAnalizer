@@ -9,11 +9,16 @@ namespace FileSystemAnalizer.Domain
 {
     public interface IFolderScanData : IFileSystemScanData, ILazyDataLoader<IFolderScanData>
     {
-        //long TotalFilesCount { get; }
-        //long TotalFoldersCount { get; }
-        //long FoldersCount { get; }
-        //long FilesCount { get; }
-        //long TotalElementsCount { get; }
+        long TotalFilesCount { get; }
+
+        long TotalFoldersCount { get; }
+
+        long FoldersCount { get; }
+
+        long FilesCount { get; }
+
+        long TotalElementsCount { get; }
+
         IEnumerable<IFolderScanData> Folders { get; }
 
         IEnumerable<IFileScanData> Files { get; }
