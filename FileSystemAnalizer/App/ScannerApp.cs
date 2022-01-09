@@ -39,19 +39,26 @@ namespace FileSystemAnalizer.App
         {
             var firstFolderData = Scan(path);
             scanDataTreeBuilder.Build(firstFolderData);
-
+            OnSortButtonClick();
         }
 
         public void OnSelectDataNode(IDataNode<IFileSystemScanData> node)
         {
             if (node is IFileDataNode)
             {
+                //при выборе ноды-файла
                 node.Label = $"{node.ScanData.Path}";
             }
             else if (node is IFolderDataNode)
             {
+                //при выборе ноды-папки
 
             }
+        }
+
+        public void OnSortButtonClick()
+        {
+            scanDataTreeBuilder.SortNodesBy(n => n.ScanData.Name);
         }
     }
 }

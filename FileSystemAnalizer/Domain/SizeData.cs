@@ -18,7 +18,7 @@ namespace FileSystemAnalizer.Domain
             Terabyte = Byte << 40
         }
 
-        public readonly long SizeInBytes;
+        public long SizeInBytes { get; }
         //public static SizeData None = new SizeData(0);
 
         public ByteUnit BestFittingUnits

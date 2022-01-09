@@ -12,6 +12,7 @@ namespace FileSystemAnalizer.UI
     public class ScanDataTreeBuilder : IScanDataTreeBuilder
     {
         private readonly TreeView treeView;
+        private IFolderDataNode scanRootNode;
 
         public ScanDataTreeBuilder(TreeView treeView, ImageList imageList)
         {
@@ -24,8 +25,31 @@ namespace FileSystemAnalizer.UI
             treeView.Nodes.Clear();
             var rootFolderNode = new FolderDataNode(rootFolderData);
             treeView.Nodes.Add(rootFolderNode);
-            rootFolderNode.FillAllSubNodes();
-            rootFolderNode.FillAllSubNodesSortedBy(n => n.Size.SizeInBytes);
+            scanRootNode = rootFolderNode;
+            rootFolderNode.CreateAllSubNodes();
+        }
+
+        public void SortNodesBy<TKey>(Func<IDataNode<IFileSystemScanData>, TKey> keySelector) where TKey : IComparable
+        {
+            if (scanRootNode == null)
+                return;
+            SortSubNodes(scanRootNode, keySelector);
+        }
+
+        private void SortSubNodes<TKey>(
+            IFolderDataNode folderNode, 
+            Func<IDataNode<IFileSystemScanData>, TKey> keySelector) where TKey : IComparable
+        {
+            var sortedFolderNodes = folderNode.FolderDataNodes.OrderBy(keySelector).Cast<IFolderDataNode>().ToList();
+            var sortedFileNodes = folderNode.FileDataNodes.OrderBy(keySelector).Cast<IFileDataNode>().ToList();
+            folderNode.ClearNodes();
+            foreach (var node in sortedFolderNodes)
+            {
+                folderNode.AddNode(node);
+                SortSubNodes(node, keySelector);
+            }
+            foreach (var node in sortedFileNodes)
+                folderNode.AddNode(node);
         }
     }
 }

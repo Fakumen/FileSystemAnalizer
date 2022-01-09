@@ -9,13 +9,17 @@ namespace FileSystemAnalizer.App
 {
     public interface IFolderDataNode : IDataNode<IFolderScanData>
     {
+        IEnumerable<IFolderDataNode> FolderDataNodes { get; }
+
+        IEnumerable<IFileDataNode> FileDataNodes { get; }
+
         void AddNode(IFolderDataNode folderNode);
 
         void AddNode(IFileDataNode fileNode);
 
-        void FillAllSubNodes();
+        void ClearNodes();
 
-        void FillAllSubNodesSortedBy<TKey>(Func<IFileSystemScanData, TKey> sorter) where TKey : IComparable;
+        void CreateAllSubNodes();
     }
 
     public static class IFolderDataNodeExtensions
@@ -28,7 +32,7 @@ namespace FileSystemAnalizer.App
             {
                 var folderNode = folderNodeFactory(folderData);
                 rootFolderNode.AddNode(folderNode);
-                folderNode.FillAllSubNodes();
+                folderNode.CreateAllSubNodes();
             }
             //Заполнены все подпапки
             foreach (var fileData in rootFolderNode.ScanData.Files)

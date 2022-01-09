@@ -10,5 +10,7 @@ namespace FileSystemAnalizer.App
     public interface IScanDataTreeBuilder
     {
         void Build(IFolderScanData rootFolderData);
+
+        void SortNodesBy<TKey>(Func<IDataNode<IFileSystemScanData>, TKey> keySelector) where TKey : IComparable;
     }
 }
