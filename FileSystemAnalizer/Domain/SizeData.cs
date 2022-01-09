@@ -19,7 +19,6 @@ namespace FileSystemAnalizer.Domain
         }
 
         public long SizeInBytes { get; }
-        //public static SizeData None = new SizeData(0);
 
         public ByteUnit BestFittingUnits
         {

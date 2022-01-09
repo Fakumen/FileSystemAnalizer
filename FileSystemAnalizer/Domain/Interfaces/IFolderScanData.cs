@@ -15,7 +15,10 @@ namespace FileSystemAnalizer.Domain
         //long FilesCount { get; }
         //long TotalElementsCount { get; }
         IEnumerable<IFolderScanData> Folders { get; }
+
         IEnumerable<IFileScanData> Files { get; }
+
+        bool IsInspected { get; }
 
         void Inspect();
     }

@@ -12,10 +12,13 @@ namespace FileSystemAnalizer.App
     {
         private IScanDataTreeBuilder scanDataTreeBuilder => lazyTreeBuilder.Value;
         private readonly Lazy<IScanDataTreeBuilder> lazyTreeBuilder;
+        private IScanDataInspector dataInspector => lazyDataInspector.Value;
+        private readonly Lazy<IScanDataInspector> lazyDataInspector;
 
-        public ScannerApp(Lazy<IScanDataTreeBuilder> treeBuilder)
+        public ScannerApp(Lazy<IScanDataTreeBuilder> treeBuilder, Lazy<IScanDataInspector> dataInspector)
         {
             lazyTreeBuilder = treeBuilder;
+            lazyDataInspector = dataInspector;
         }
 
         private IFolderScanData Scan(string folderPath)
@@ -27,7 +30,7 @@ namespace FileSystemAnalizer.App
             return result;
         }
 
-        public void InspectAll(IFolderScanData folderData)
+        private void InspectAll(IFolderScanData folderData)
         {
             folderData.Inspect();
             foreach (var f in folderData.Folders)
@@ -44,15 +47,16 @@ namespace FileSystemAnalizer.App
 
         public void OnSelectDataNode(IDataNode<IFileSystemScanData> node)
         {
-            if (node is IFileDataNode)
+            if (node is IFileDataNode fileNode)
             {
                 //при выборе ноды-файла
                 node.Label = $"{node.ScanData.Path}";
+                dataInspector.DisplayScanDataInformation(fileNode);
             }
-            else if (node is IFolderDataNode)
+            else if (node is IFolderDataNode folderNode)
             {
                 //при выборе ноды-папки
-
+                dataInspector.DisplayScanDataInformation(folderNode);
             }
         }
 

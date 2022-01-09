@@ -68,14 +68,14 @@ namespace FileSystemAnalizer.Domain
             {
                 files.Add(new FileScanData(file));
             }
-            if (FoldersCount == 0)
-                ClaimDataReady();
+            IsInspected = true;
             if (isFolderEnumerateFailed || isFileEnumerateFailed)
             {
-                //обработка файлов, к которым нет доступа
+                IsInspected = false;
                 ClaimDataReady();
             }
-            IsInspected = true;
+            if (FoldersCount == 0)
+                ClaimDataReady();
         }
 
         private void OnSubfolderDataReady(IFolderScanData data)
@@ -98,7 +98,7 @@ namespace FileSystemAnalizer.Domain
 
         private T EnsureDataIsReady<T>(T value)
         {
-            if (!IsDataReady)
+            if (!IsDataReady || !IsInspected)
                 throw new ObjectNotReadyException($"Object was not ready for use. Please, ensure that object's {nameof(IsDataReady)} property is true before use or use {nameof(DataReady)} event.");
             return value;
         }
