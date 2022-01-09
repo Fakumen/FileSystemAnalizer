@@ -29,7 +29,7 @@ namespace FileSystemAnalizer
 
             var form = container.Get<FileAnalizerForm>();
             container.Bind<TreeView>().ToConstant(form.ScanHierarchyTree);
-
+            container.Bind<IScanDataInspector>().To<ScanDataInspector>().InSingletonScope();
             Application.Run(form);
         }
     }

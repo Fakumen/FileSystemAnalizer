@@ -18,7 +18,7 @@ namespace FileSystemAnalizer.UI
         {
             var data = folderDataNode.ScanData;
             var sizeUnits = data.Size.BestFittingUnits;
-            var size = data.IsInspected ? $"{data.Size.GetInUnits(sizeUnits)} {sizeUnits}" : "???";
+            var size = data.IsInspected ? $"{data.Size.GetInUnits(sizeUnits):f1} {sizeUnits}" : "???";
             folderDataNode.Label = $"{data.Name} [{size}]";
         }
 
