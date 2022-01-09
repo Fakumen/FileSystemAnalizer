@@ -58,7 +58,7 @@ namespace FileSystemAnalizer.App
 
         public void OnSortButtonClick()
         {
-            scanDataTreeBuilder.SortNodesBy(n => n.ScanData.Name);
+            scanDataTreeBuilder.SortNodesBy(n => n.ScanData.Size.SizeInBytes);
         }
     }
 }
