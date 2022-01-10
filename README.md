@@ -19,4 +19,4 @@
 5. Краткое описание точек расширения:
     * Сортировка по разным параметрам (SortNodesBy, SortNodesByDescending) - [IScanDataTreeBuilder](https://github.com/Fakumen/FileSystemAnalyzer/blob/main/FileSystemAnalyzer/App/Interfaces/IScanDataTreeBuilder.cs)
     * Фильтрация выходных данных на делегировании (селектор у Build()) - [IScanDataTreeBuilder](https://github.com/Fakumen/FileSystemAnalyzer/blob/main/FileSystemAnalyzer/App/Interfaces/IScanDataTreeBuilder.cs)
-    * Каждый вышестоящие по архитектуре DDD слой можно заменить на другие, реализовав все выше. Например, слой UI можно заменить на другой, реализовав нужные интерфейсы из слоя App
+    * Каждый вышестоящие по архитектуре DDD слой можно заменить на другие, реализовав все выше. Например, слой UI можно заменить на другой, реализовав нужные интерфейсы, которые App требует от UI
