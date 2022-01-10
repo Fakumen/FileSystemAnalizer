@@ -1,11 +1,7 @@
-﻿using FileSystemAnalizer.Infrastructure;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FileSystemAnalizer.Domain
+namespace FileSystemAnalyzer.Domain
 {
     public class SizeData
     {
@@ -33,9 +29,7 @@ namespace FileSystemAnalizer.Domain
         }
 
         public override string ToString()
-        {
-            return $"{GetInUnits(BestFittingUnits):f1} {BestFittingUnits}";
-        }
+            => $"{GetInUnits(BestFittingUnits):f1} {BestFittingUnits}";
 
         private ByteUnit CalculateBestFittingUnits()
         {

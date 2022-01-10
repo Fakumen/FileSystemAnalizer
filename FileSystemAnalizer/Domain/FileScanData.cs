@@ -1,12 +1,7 @@
-﻿using FileSystemAnalizer.Infrastructure;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FileSystemAnalizer.Domain
+namespace FileSystemAnalyzer.Domain
 {
     public sealed class FileScanData : IFileScanData
     {
@@ -17,6 +12,7 @@ namespace FileSystemAnalizer.Domain
         public DateTime CreationTime => fileInfo.CreationTime;
         public DateTime LastAccessTime => fileInfo.LastAccessTime;
         public DateTime LastWriteTime => fileInfo.LastWriteTime;
+        public FileAttributes Attributes => fileInfo.Attributes;
 
         private readonly FileInfo fileInfo;
 
@@ -24,8 +20,6 @@ namespace FileSystemAnalizer.Domain
         {
             this.fileInfo = fileInfo;
             Size = new SizeData(fileInfo.Length);
-            //Path = fileInfo.FullName;
-            //Weight = fileInfo.Length;
         }
     }
 }

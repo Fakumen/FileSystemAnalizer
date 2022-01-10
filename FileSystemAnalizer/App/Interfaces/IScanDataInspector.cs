@@ -1,4 +1,4 @@
-﻿namespace FileSystemAnalizer.App
+﻿namespace FileSystemAnalyzer.App
 {
     public interface IScanDataInspector
     {

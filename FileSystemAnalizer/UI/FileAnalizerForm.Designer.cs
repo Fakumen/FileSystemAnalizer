@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-namespace FileSystemAnalizer.UI
+namespace FileSystemAnalyzer.UI
 {
     partial class FileAnalizerForm
     {
@@ -36,6 +36,7 @@ namespace FileSystemAnalizer.UI
             this.selectedNodePropertiesBox = new System.Windows.Forms.ListBox();
             this.selectedNodeIconBox = new System.Windows.Forms.PictureBox();
             this.sortButton = new System.Windows.Forms.Button();
+            this.selectedNodeSizeLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.selectedNodeIconBox)).BeginInit();
             this.SuspendLayout();
@@ -59,6 +60,7 @@ namespace FileSystemAnalizer.UI
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox1.Controls.Add(this.selectedNodeSizeLabel);
             this.groupBox1.Controls.Add(this.selectedNodeTitleLabel);
             this.groupBox1.Controls.Add(this.selectedNodePropertiesBox);
             this.groupBox1.Controls.Add(this.selectedNodeIconBox);
@@ -110,6 +112,15 @@ namespace FileSystemAnalizer.UI
             this.sortButton.Text = "Сортировать по размеру";
             this.sortButton.UseVisualStyleBackColor = true;
             // 
+            // selectedNodeSizeLabel
+            // 
+            this.selectedNodeSizeLabel.AutoSize = true;
+            this.selectedNodeSizeLabel.Location = new System.Drawing.Point(150, 77);
+            this.selectedNodeSizeLabel.Name = "selectedNodeSizeLabel";
+            this.selectedNodeSizeLabel.Size = new System.Drawing.Size(39, 23);
+            this.selectedNodeSizeLabel.TabIndex = 2;
+            this.selectedNodeSizeLabel.Text = "Вес";
+            // 
             // FileAnalizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -137,6 +148,7 @@ namespace FileSystemAnalizer.UI
         private ListBox selectedNodePropertiesBox;
         private Button sortButton;
         private Label selectedNodeTitleLabel;
+        private Label selectedNodeSizeLabel;
     }
 }
 

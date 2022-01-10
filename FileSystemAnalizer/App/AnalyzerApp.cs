@@ -1,18 +1,15 @@
-﻿using FileSystemAnalizer.Domain;
+﻿using FileSystemAnalyzer.Domain;
 using System;
-using System.IO;
 
-namespace FileSystemAnalizer.App
+namespace FileSystemAnalyzer.App
 {
     public class AnalyzerApp
     {
         private IScanDataTreeBuilder scanDataTreeBuilder => lazyTreeBuilder.Value;
-        private readonly Lazy<IScanDataTreeBuilder> lazyTreeBuilder;
         private IScanDataInspector dataInspector => lazyDataInspector.Value;
+        private readonly Lazy<IScanDataTreeBuilder> lazyTreeBuilder;
         private readonly Lazy<IScanDataInspector> lazyDataInspector;
-
         private readonly Scanner<IFolderScanData> folderScanner;
-
         private bool sortByDescending;
 
         public AnalyzerApp(Scanner<IFolderScanData> folderScanner, Lazy<IScanDataTreeBuilder> treeBuilder, Lazy<IScanDataInspector> dataInspector)

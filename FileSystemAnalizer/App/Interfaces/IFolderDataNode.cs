@@ -1,7 +1,7 @@
-﻿using FileSystemAnalizer.Domain;
+﻿using FileSystemAnalyzer.Domain;
 using System.Collections.Generic;
 
-namespace FileSystemAnalizer.App
+namespace FileSystemAnalyzer.App
 {
     public interface IFolderDataNode : IDataNode<IFolderScanData>
     {

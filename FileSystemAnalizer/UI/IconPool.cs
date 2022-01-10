@@ -1,8 +1,8 @@
-﻿using FileSystemAnalizer.Properties;
+﻿using FileSystemAnalyzer.Properties;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace FileSystemAnalizer.UI
+namespace FileSystemAnalyzer.UI
 {
     public static class IconPool
     {

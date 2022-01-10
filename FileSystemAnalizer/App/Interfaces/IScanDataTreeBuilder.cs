@@ -1,7 +1,7 @@
-﻿using FileSystemAnalizer.Domain;
+﻿using FileSystemAnalyzer.Domain;
 using System;
 
-namespace FileSystemAnalizer.App
+namespace FileSystemAnalyzer.App
 {
     public interface IScanDataTreeBuilder
     {

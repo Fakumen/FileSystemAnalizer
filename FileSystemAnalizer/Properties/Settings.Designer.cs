@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FileSystemAnalizer.Properties
+namespace FileSystemAnalyzer.Properties
 {
 
 

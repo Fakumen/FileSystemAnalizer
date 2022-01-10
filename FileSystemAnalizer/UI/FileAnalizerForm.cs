@@ -1,9 +1,9 @@
-﻿using FileSystemAnalizer.Domain;
+﻿using FileSystemAnalyzer.Domain;
 using System;
 using System.Windows.Forms;
-using FileSystemAnalizer.App;
+using FileSystemAnalyzer.App;
 
-namespace FileSystemAnalizer.UI
+namespace FileSystemAnalyzer.UI
 {
     public partial class FileAnalizerForm : Form
     {
@@ -13,6 +13,7 @@ namespace FileSystemAnalizer.UI
         public PictureBox SelectedNodeIconBox => selectedNodeIconBox;
         public ListBox SelectedNodePropertiesBox => selectedNodePropertiesBox;
         public Label SelectedNodeTitleLabel => selectedNodeTitleLabel;
+        public Label SelectedNodeSizeLabel => selectedNodeSizeLabel;
 
         public FileAnalizerForm(Lazy<AnalyzerApp> scannerApp)
         {

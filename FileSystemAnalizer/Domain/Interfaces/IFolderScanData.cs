@@ -1,11 +1,7 @@
-﻿using FileSystemAnalizer.Infrastructure;
-using System;
+﻿using FileSystemAnalyzer.Infrastructure;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FileSystemAnalizer.Domain
+namespace FileSystemAnalyzer.Domain
 {
     public interface IFolderScanData : IFileSystemScanData, ILazyDataLoader<IFolderScanData>
     {

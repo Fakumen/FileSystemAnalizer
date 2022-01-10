@@ -1,8 +1,8 @@
-﻿using FileSystemAnalizer.Domain;
+﻿using FileSystemAnalyzer.Domain;
 using System;
 using System.IO;
 
-namespace FileSystemAnalizer.App
+namespace FileSystemAnalyzer.App
 {
     public class Scanner<TFolderData> where TFolderData : IFolderScanData
     {

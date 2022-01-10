@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FileSystemAnalizer.Infrastructure;
+using FileSystemAnalyzer.Infrastructure;
 
-namespace FileSystemAnalizer.Domain
+namespace FileSystemAnalyzer.Domain
 {
     public sealed class FolderScanData : IFolderScanData
     {
@@ -23,11 +21,13 @@ namespace FileSystemAnalizer.Domain
         public DateTime LastWriteTime => directoryInfo.LastWriteTime;
         public long FoldersCount => folders.Count();
         public long FilesCount => files.Count();
+        [LazyData]
         public long TotalElementsCount => TotalFilesCount + TotalFoldersCount;
         public IEnumerable<IFolderScanData> Folders => folders;//.Select(f => f) Нельзя сделать даункаст к листу и изменить
         public IEnumerable<IFileScanData> Files => files;
         public bool IsDataReady { get; private set; } = false;
         public bool IsInspected { get; private set; }
+        public FileAttributes Attributes => directoryInfo.Attributes;
 
         private readonly Lazy<long> totalFilesCount;
         private readonly Lazy<long> totalFoldersCount;
@@ -71,6 +71,7 @@ namespace FileSystemAnalizer.Domain
             IsInspected = true;
             if (isFolderEnumerateFailed || isFileEnumerateFailed)
             {
+                //Не получилось посмотреть подпапки/файлы
                 IsInspected = false;
                 ClaimDataReady();
             }

@@ -1,8 +1,8 @@
-﻿using FileSystemAnalizer.App;
-using FileSystemAnalizer.Domain;
+﻿using FileSystemAnalyzer.App;
+using FileSystemAnalyzer.Domain;
 using System.Windows.Forms;
 
-namespace FileSystemAnalizer.UI
+namespace FileSystemAnalyzer.UI
 {
     public class FileDataNode : TreeNode, IFileDataNode
     {

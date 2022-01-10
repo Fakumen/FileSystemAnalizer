@@ -1,6 +1,6 @@
-﻿using FileSystemAnalizer.Domain;
+﻿using FileSystemAnalyzer.Domain;
 
-namespace FileSystemAnalizer.App
+namespace FileSystemAnalyzer.App
 {
     public interface IDataNode<out TScanData>
         where TScanData : IFileSystemScanData
