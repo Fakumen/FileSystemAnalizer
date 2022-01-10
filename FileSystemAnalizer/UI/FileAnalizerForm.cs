@@ -1,28 +1,20 @@
 ﻿using FileSystemAnalizer.Domain;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 using FileSystemAnalizer.App;
 
 namespace FileSystemAnalizer.UI
 {
     public partial class FileAnalizerForm : Form
     {
-        private ScannerApp scannerApp => lazyScannerApp.Value;
-        private readonly Lazy<ScannerApp> lazyScannerApp;
+        private AnalyzerApp scannerApp => lazyScannerApp.Value;
+        private readonly Lazy<AnalyzerApp> lazyScannerApp;
         public TreeView ScanHierarchyTree => fileHierarchyTree;
         public PictureBox SelectedNodeIconBox => selectedNodeIconBox;
         public ListBox SelectedNodePropertiesBox => selectedNodePropertiesBox;
         public Label SelectedNodeTitleLabel => selectedNodeTitleLabel;
 
-        public FileAnalizerForm(Lazy<ScannerApp> scannerApp)
+        public FileAnalizerForm(Lazy<AnalyzerApp> scannerApp)
         {
             InitializeComponent();
             lazyScannerApp = scannerApp;

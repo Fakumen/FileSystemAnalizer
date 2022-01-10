@@ -1,11 +1,6 @@
 ﻿using FileSystemAnalizer.App;
 using FileSystemAnalizer.Domain;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FileSystemAnalizer.UI
@@ -53,21 +48,6 @@ namespace FileSystemAnalizer.UI
             Nodes.Clear();
             fileNodes.Clear();
             folderNodes.Clear();
-        }
-
-        public void CreateAllSubNodes()
-        {
-            foreach (var folderData in ScanData.Folders)
-            {
-                var folderNode = new FolderDataNode(folderData);
-                AddNode(folderNode);
-                folderNode.CreateAllSubNodes();
-            }
-            foreach (var fileData in ScanData.Files)
-            {
-                var fileNode = new FileDataNode(fileData);
-                AddNode(fileNode);
-            }
         }
     }
 }

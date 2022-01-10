@@ -1,10 +1,7 @@
 ﻿using FileSystemAnalizer.App;
 using FileSystemAnalizer.Domain;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FileSystemAnalizer.UI
@@ -48,18 +45,19 @@ namespace FileSystemAnalizer.UI
             }
         }
 
-        public void SortNodesBy<TKey>(Func<IDataNode<IFileSystemScanData>, TKey> keySelector) where TKey : IComparable
+        public void SortTree<TKey>(Func<IDataNode<IFileSystemScanData>, TKey> keySelector, bool byDescending)
+            where TKey : IComparable
         {
             if (scanRootNode == null)
                 return;
-            SortSubNodes(scanRootNode, keySelector);
-        }
-
-        public void SortNodesByDescending<TKey>(Func<IDataNode<IFileSystemScanData>, TKey> keySelector) where TKey : IComparable
-        {
-            if (scanRootNode == null)
-                return;
-            SortSubNodesByDescending(scanRootNode, keySelector);
+            if (byDescending)
+            {
+                SortSubNodesByDescending(scanRootNode, keySelector);
+            }
+            else
+            {
+                SortSubNodes(scanRootNode, keySelector);
+            }
         }
 
         private void SortSubNodes<TKey>(

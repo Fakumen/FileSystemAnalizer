@@ -1,14 +1,11 @@
 ﻿using FileSystemAnalizer.App;
 using FileSystemAnalizer.Domain;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
 using FileSystemAnalizer.Infrastructure;
+using Ninject;
 
 namespace FileSystemAnalizer.UI
 {
@@ -18,7 +15,10 @@ namespace FileSystemAnalizer.UI
         private readonly ListBox propertiesBox;
         private readonly Label titleLabel;
 
-        public ScanDataInspector(PictureBox iconBox, ListBox propertiesBox, Label titleLabel)
+        public ScanDataInspector(
+            [Named("SelectedNodeIcon")] PictureBox iconBox,
+            [Named("SelectedNodeProperties")] ListBox propertiesBox, 
+            [Named("SelectedNodeTitle")] Label titleLabel)
         {
             this.iconBox = iconBox;
             this.propertiesBox = propertiesBox;
@@ -49,15 +49,6 @@ namespace FileSystemAnalizer.UI
         {
             var properties = data.GetType().GetProperties();
             var isInspected = false;
-            //var properties = new PropertyInfo[0];
-            //if (data is IFileScanData)
-            //{
-            //    properties = typeof(IFileScanData).GetProperties();
-            //}
-            //else if (data is IFolderScanData)
-            //{
-            //    properties = typeof(IFolderScanData).GetProperties();
-            //}
             if (data is IFolderScanData folderData)
             {
                 isInspected = folderData.IsInspected;
