@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
+using FileSystemAnalizer.Infrastructure;
 
 namespace FileSystemAnalizer.UI
 {
@@ -46,18 +47,27 @@ namespace FileSystemAnalizer.UI
         private void AddProperties<TData>(TData data)
             where TData : IFileSystemScanData
         {
-            var properties = data.GetType().GetProperties();//new PropertyInfo[0];
+            var properties = data.GetType().GetProperties();
+            var isInspected = false;
+            //var properties = new PropertyInfo[0];
             //if (data is IFileScanData)
             //{
             //    properties = typeof(IFileScanData).GetProperties();
             //}
             //else if (data is IFolderScanData)
             //{
-            //    properties = typeof(IFileScanData).GetProperties();
+            //    properties = typeof(IFolderScanData).GetProperties();
             //}
+            if (data is IFolderScanData folderData)
+            {
+                isInspected = folderData.IsInspected;
+            }
             foreach (var p in properties)
             {
-                propertiesBox.Items.Add($"{p.Name}: {p.GetValue(data)}");
+                var hasLazyDataAttribute = p.GetCustomAttributes<LazyDataAttribute>().Count() > 0;
+                var dataIsUnknown = hasLazyDataAttribute && !isInspected;
+                var propertyValue = dataIsUnknown ? "???" : p.GetValue(data).ToString();
+                propertiesBox.Items.Add($"{p.Name}: {propertyValue}");
             }
         }
     }
