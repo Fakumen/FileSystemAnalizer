@@ -1,10 +1,10 @@
 # FileSystemAnalyzer
 1. Название проекта: File System Analyzer
 2. Студенты-участники:
-    * Орлов Илья Вячеславович РИ-390015
-    * Матвеев Фёдор Георгиевич РИ-390003
-    * Лаптев Денис Александрович РИ-390004
-    * Гарнышев Дмитрий Александрович РИ-390001
+    * Орлов Илья Вячеславович РИ-390015 (АТ-01)
+    * Матвеев Фёдор Георгиевич РИ-390003 (АТ-04)
+    * Лаптев Денис Александрович РИ-390004 (АТ-01)
+    * Гарнышев Дмитрий Александрович РИ-390001 (АТ-04)
 3. Проблема, которую решает проект:
     * Пользователю необходимо просканировать файловую систему и определить вес папок и файлов в ней.
 4. Описание основных компонентов, из которых состоит проект:
@@ -17,5 +17,6 @@
     * [UI] Класс формы - перенаправляет нажатия кнопок на ScannerApp 
     * [Точка сбора] Program - сборка зависимостей с помощью DI и запуск формы
 5. Краткое описание точек расширения:
-    * Сортировка по разным параметрам (SortNodesBy, SortNodesByDescending) - [IScanDataTreeBuilder](https://github.com/Fakumen/FileSystemAnalizer/blob/main/FileSystemAnalizer/App/Interfaces/IScanDataTreeBuilder.cs)
-    * Фильтрация выходных данных на делегировании (селектор у Build()) - [IScanDataTreeBuilder](https://github.com/Fakumen/FileSystemAnalizer/blob/main/FileSystemAnalizer/App/Interfaces/IScanDataTreeBuilder.cs)
+    * Сортировка по разным параметрам (SortNodesBy, SortNodesByDescending) - [IScanDataTreeBuilder](https://github.com/Fakumen/FileSystemAnalyzer/blob/main/FileSystemAnalyzer/App/Interfaces/IScanDataTreeBuilder.cs)
+    * Фильтрация выходных данных на делегировании (селектор у Build()) - [IScanDataTreeBuilder](https://github.com/Fakumen/FileSystemAnalyzer/blob/main/FileSystemAnalyzer/App/Interfaces/IScanDataTreeBuilder.cs)
+    * Каждый вышестоящие по архитектуре DDD слой можно заменить на другие, реализовав все выше. Например, слой UI можно заменить на другой, реализовав нужные интерфейсы из слоя App
